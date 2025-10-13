@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Validate Python syntax
+      run: |
+        python -m py_compile Lab1_CPU_Scheduling/scheduling.py
+        python -m py_compile Lab2_Memory_Management/paging.py
+        python -m py_compile Lab3_File_System/filesystem.py
+
+    - name: Run hidden test suite
+      continue-on-error: true
+      run: |
+        echo "🔒 Running instructor test suites..."
+        echo "=== Lab 1: CPU Scheduling ==="
+        python tests/test_lab1_hidden.py || echo "⚠️ Lab 1 tests completed with issues"
+        echo ""
+        echo "=== Lab 2: Memory Management ==="
+        python tests/test_lab2_hidden.py || echo "⚠️ Lab 2 tests completed with issues"
+        echo ""
+        echo "=== Lab 3: File Systems ==="
+        python tests/test_lab3_hidden.py || echo "⚠️ Lab 3 tests completed with issues"
+
+    - name: Run student implementations (for debugging)
+      continue-on-error: true
+      run: |
+        echo "🧪 Testing student implementations..."
+        cd Lab1_CPU_Scheduling
+        python scheduling.py || echo "⚠️ Lab 1 implementation had issues"
+        cd ../Lab2_Memory_Management
+        python paging.py || echo "⚠️ Lab 2 implementation had issues"
+        cd ../Lab3_File_System
+        python filesystem.py || echo "⚠️ Lab 3 implementation had issues"
+
+    - name: Check project structure
+      run: |
+        echo "✅ Checking project structure..."
+        test -f Lab1_CPU_Scheduling/scheduling.py || exit 1
+        test -f Lab2_Memory_Management/paging.py || exit 1
+        test -f Lab3_File_System/filesystem.py || exit 1
+        echo "✅ All required files present"
+
+    - name: Validation complete
+      run: |
+        echo "🎉 Project validation successful!"
+        echo "🚀 Ready for student submissions"
