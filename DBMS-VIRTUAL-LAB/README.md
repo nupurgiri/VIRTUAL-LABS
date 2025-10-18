@@ -15,24 +15,30 @@ cd DBMS-VIRTUAL-LAB
 ```
 
 ### 2. Open vs code and go to extensions and install below :
-- **GitHub Copilot**
-- **SQLTools** (for running SQL queries directly from VS Code)
-- **SQLite** (if you want to practice with SQLite as well)
+- **GitHub Copilot** 
+- **SQLTools** 
+- **SQLite** 
 
 ### 3. Open the database
-- In VS Code, go to the SQLite Explorer tab (from the installed extension).
+- In VS Code, type **'>'** in top centered searchbar (Now you will see many options in dropdown).
 
-- Click “Open Database” → Select database/company.db from this repo.
+- Click “Open Database” → Select database/company.db appearing at 1st position. (It is our dummy database for your practice).
 
-- Expand the database to see all tables:
+- Now, in Left explorer sidebar you can see SQLITE EXPLORER dropdown on lower side. Expand the database by clicking to see all below mentioned tables:
 
-- department
+1) department
 
-- employee
+ 2) employee
 
-- project
+3) project
 
-- works_on
+4) works_on
+
+- Now, right click on any table name and click on 'new query' options to type queries on that table.
+
+- after typing queries simply right click on that area where you typed queries and click on 'run query' option to execute the query.
+
+- You can see output on right side of the screen in a new tab. As well as you can ask doubts to copilot by opening Github copilot window.
 
 ### ✅ NOTE: *Now you can learn from our contents folders respectively, practice queries on these tables and ask doubts or tips to github copilot extension in vs code, Hence all in one at your fingertips in VS CODE only!*
 
