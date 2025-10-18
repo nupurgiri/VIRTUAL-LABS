@@ -14,7 +14,7 @@ def linked_allocation(files, disk_size):
     Simulate linked allocation of files on disk.
     files: list of (filename, size) or list of dicts with 'name' and 'size'
     disk_size: total disk blocks
-    Returns: allocation table
+    Returns: allocation table ..
     """
     # TODO: Implement linked allocation algorithm
     # For now, return empty dict to prevent test failures
